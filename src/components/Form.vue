@@ -25,13 +25,13 @@
                 this.$emit('show');
             },
             onBtnClick() {
-                this.$emit('add', {
-                    id: 5,
+                this.$emit('show');
+                this.$store.commit('saveCoast', {
+                    id: Math.round(Math.random() * 10000),
                     date: this.date,
                     category: this.description,
                     value: this.amount
-                });
-                this.$emit('show');
+                })
             }
         }
     }
