@@ -1,10 +1,16 @@
 <template>
-    <div @click="onBtnClick" class="btn">ADD NEW +</div>
+    <div>
+        <router-link :to="href" class="btn">ADD NEW +</router-link>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
 export default {
     name: 'AddButton',
+    props: {
+        href: String,
+    },
     methods: {
         onBtnClick() {
           this.$emit('show');
@@ -20,6 +26,7 @@ export default {
        border-radius: 3px;
        color: white;
        padding: 7px 25px;
+       text-decoration: none;
        display: inline-block;
        cursor: pointer;
        transition: .3s;
