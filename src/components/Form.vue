@@ -1,11 +1,11 @@
 <template>
-    <div class="form">
-        <span class="close" @click="close">X</span>
+    <div class="form" v-if="isVisible">
+        <span class="close" @click="$router.back()">X</span>
         <div class="container">
             <input v-model="description" placeholder="Payment description">
             <input v-model="amount" placeholder="Payment amount">
             <input v-model="date" placeholder="Payment date">
-            <div @click="onBtnClick" class="form-addBtn">ADD +</div>
+            <div @click="saveData" class="form-addBtn">ADD +</div>
         </div>
     </div>
 </template>
@@ -15,25 +15,29 @@
         name: 'Form',
         data() {
             return {
-                date: '',
-                amount: '',
-                description: '',
+                isVisible: true,
+                date: (new Date()).toLocaleDateString(),
+                amount: this.$route.query.value || '',
+                description: this.$route.params.category || '',
             };
         },
         methods: {
-            close() {
-                this.$emit('show');
-            },
-            onBtnClick() {
-                this.$emit('show');
+            saveData() {
                 this.$store.commit('saveCoast', {
                     id: Math.round(Math.random() * 10000),
                     date: this.date,
                     category: this.description,
                     value: this.amount
-                })
+                });
+                this.$router.back();
             }
-        }
+        },
+        created() {
+            if (this.$route.query.value && this.$route.params.category) {
+                this.isVisible = false;
+                this.saveData();
+            }
+        },
     }
 </script>
 
