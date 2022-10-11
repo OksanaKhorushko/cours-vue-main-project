@@ -1,9 +1,12 @@
+
+
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <AddButton @show="popupToggly"></AddButton>
-    <Form @show="popupToggly" @add="addCost" v-if="isPopupActive"></Form>
-    <List :list="costsList"></List>
+    <Form @show="popupToggly" v-if="isPopupActive"></Form>
+    <List :list="$store.state.coastList"></List>
+    <Pagination />
   </div>
 </template>
 
@@ -11,33 +14,27 @@
 import AddButton from './components/AddButton.vue'
 import Form from './components/Form.vue'
 import List from './components/List.vue'
+import Pagination from './components/Pagination.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
-  components: { AddButton, Form, List },
+  components: { AddButton, Form, List, Pagination },
   data() {
     return {
-      costsList: [],
       isPopupActive: false
     }
   },
   methods: {
-    fetchData() {
-      return [
-        {id: 1, date: '12.09.2022', category: 'food', value: 1570},
-        {id: 2, date: '14.09.2022', category: 'transport', value: 200},
-        {id: 3, date: '17.09.2022', category: 'healthcare', value: 700}
-      ]
-    },
-    addCost(cost) {
-      this.costsList.push(cost);
-    },
+    ...mapActions([
+      'fetchData',
+    ]),
     popupToggly() {
       this.isPopupActive = !this.isPopupActive
     }
   },
-  created() {
-    this.costsList = this.fetchData()
+  mounted () {
+    this.fetchData(1);
   }
 }
 </script>
