@@ -1,7 +1,7 @@
 export const coasts = {
   'page 1': [{
-      'id': 1,
       'date': '20.03.2020',
+      'id': 1,
       'category': 'Food',
       'value': 169,
     },

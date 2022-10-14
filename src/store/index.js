@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { mutations, actions } from './payments';
+import { mutations, actions, getters } from './payments';
 
 Vue.use(Vuex);
 
@@ -10,10 +10,9 @@ export default new Vuex.Store({
     loadedData: {},
     currentPage: 1,
   },
-  getters: {
-  },
   mutations,
   actions,
+  getters,
   modules: {
   },
 });
