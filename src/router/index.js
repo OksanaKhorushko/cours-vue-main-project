@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MainPage from '../pages/Main.page.vue';
-import Form from '../components/Form';
+import ModalAddCoast from '../components/ModalAddCoast.vue';
 
 Vue.use(VueRouter);
 
@@ -12,11 +12,15 @@ const routes = [
     children: [
       {
         path: '/add/payment',
-        component: Form,
+        component: ModalAddCoast,
       },
       {
         path: '/add/payment/:category',
-        component: Form,
+        component: ModalAddCoast,
+      },
+      {
+        path: '/edit/payment/:id',
+        component: () => import('../components/ModalEditCoast.vue'),
       },
     ],
   },
