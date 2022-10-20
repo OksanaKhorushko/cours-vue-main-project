@@ -1,21 +1,29 @@
 <template>
 <div class="form">
   <span class="close" @click="$router.back()">X</span>
-  <div class="container">
-    <input v-model="description" placeholder="Payment description">
-    <input v-model="amount" placeholder="Payment amount">
-    <input v-model="date" placeholder="Payment date">
-    <div @click="onClick" class="form-addBtn">ADD +</div>
-  </div>
+
+  <v-form ref="form" v-model="valid" lazy-validation class="form-container">
+    <v-select v-model="description"
+      :items="descriptionList"
+      :rules="[v => !!v || 'Description is required']" label="Payment description" required />
+    <v-text-field v-model="amount" label="Payment amount" required />
+    <v-text-field v-model="date" label="Payment date" required />
+    <v-btn @click="onClick" color="teal my-5" :to="href"  dark>
+      ADD +
+    </v-btn>
+  </v-form>
 </div>
 </template>
 
 <script>
+import config from '../config';
+
 export default {
   name: 'Form',
   data() {
     return {
       description: this.$props.initialDescription,
+      descriptionList: config.descriptionList,
       amount: this.$props.initialAmount,
       date: this.$props.initialDate,
     }
@@ -50,15 +58,6 @@ export default {
   cursor: pointer;
 }
 
-.container {
-  width: 290px;
-  height: 300px;
-  padding: 30px 15px;
-  background-color: white;
-  border: 1px solid cadetblue;
-  border-radius: 9px;
-}
-
 .form {
   position: fixed;
   display: flex;
@@ -69,15 +68,14 @@ export default {
   right: 0;
   left: 0;
   background: rgba(0, 0, 0, .5);
+  z-index: 1;
 
-  input {
-    padding: 10px;
-    margin: 10px auto;
-    width: 100%;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #aaa;
+  &-container {
+    width: 290px;
+    padding: 30px 15px;
+    background-color: white;
+    border: 1px solid cadetblue;
+    border-radius: 9px;
   }
 
   &-addBtn {

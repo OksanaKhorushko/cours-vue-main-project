@@ -52,7 +52,10 @@ export default {
 
 <style lang="scss">
 .context-menu {
-  position: relative;
+
+  &__wrapper {
+    position: relative;
+  }
 
   &__overlay {
     position: fixed;
@@ -60,7 +63,8 @@ export default {
     top: 0;
     right: 0;
     bottom: 0;
-    background: rgba(#000, .3)
+    background: rgba(#000, .3);
+    z-index: 1;
   }
 
   &__btn {
@@ -68,6 +72,9 @@ export default {
     background: transparent;
     font-size: 1.5rem;
     cursor: pointer;
+    background-color: transparent;
+    box-shadow: none;
+    width: 0;
 
     &:hover {
       color: cadetblue;
@@ -76,10 +83,10 @@ export default {
 
   &__list {
     position: absolute;
-    top: 40px;
-    right: 0;
+    top: 10px;
+    right: -12px;
     list-style: none;
-    padding: 0;
+    padding: 0 !important;
     margin: 0;
     background: #fff;
     z-index: 1;
@@ -88,7 +95,7 @@ export default {
     &::after {
       content: '';
       position: absolute;
-      right: 8px;
+      right: 42px;
       top: -20px;
       border: 10px solid transparent;
       border-bottom: 10px solid #fff;

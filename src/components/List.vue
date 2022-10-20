@@ -1,16 +1,23 @@
 <template>
-<div class="costs-list">
-  <div v-for="cost in list" :key="cost.id" class="costs-list__item">
-    <span>{{ cost.id }}</span>
-    <span>{{ cost.date }}</span>
-    <span>{{ cost.category }}</span>
-    <span>{{ cost.value }}</span>
-    <div class="context-menu">
-      <button class="context-menu__btn" @click="$contextMenu.show(cost.id)">&#10247;</button>
-      <ContextMenu :id="cost.id" />
-    </div>
-  </div>
-</div>
+  <v-container>
+    <v-row class="costs-list__item">
+      <v-col :cols="1">#</v-col>
+      <v-col :cols="3">Date</v-col>
+      <v-col :cols="4">Category</v-col>
+      <v-col :cols="2">Value</v-col>
+      <v-col :cols="2">Menu</v-col>
+    </v-row>
+    <v-row v-for="cost in list" :key="cost.id" class="costs-list__item">
+      <v-col :cols="1">{{ cost.id }}</v-col>
+      <v-col :cols="3">{{ cost.date }}</v-col>
+      <v-col :cols="4">{{ cost.category }}</v-col>
+      <v-col :cols="2">{{ cost.value }}</v-col>
+      <v-col :cols="2">
+        <v-btn class="context-menu__btn" @click="$contextMenu.show(cost.id)">&#10247;</v-btn>
+        <ContextMenu :id="cost.id" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -29,10 +36,6 @@ export default {
 
 <style lang="scss">
 .costs-list {
-  width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
 
   &__item {
     height: 60px;
@@ -40,14 +43,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    span {
-      flex-grow: 1;
-
-      &:first-child {
-        max-width: 30px;
-      }
-    }
   }
 }
 </style>

@@ -1,11 +1,13 @@
 
 <template>
   <div class="pagination">
-    <ul>
-      <li v-for="page in pages" @click="onPaginationClick(page)">
-        <button :class="{ active: activePage === page }">{{ page }}</button>
-      </li>
-    </ul>
+    <v-pagination
+    color="teal"
+      v-if="this.$store.state.paginationLength > 1"
+      v-model="activePage"
+      :length="this.$store.state.paginationLength"
+      circle
+    ></v-pagination>
   </div>
 </template>
 
@@ -16,7 +18,6 @@ export default {
   name: 'Pagination',
   data() {
     return {
-      pages: [1, 2],
       activePage: 1,
     }
   },
@@ -28,6 +29,9 @@ export default {
       this.activePage = page;
       this.fetchData(page)
     },
+  },
+  beforeUpdate() {
+    this.onPaginationClick(this.activePage);
   },
   mounted () {
     this.fetchData(1);
