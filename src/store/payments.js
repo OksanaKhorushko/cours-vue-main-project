@@ -17,6 +17,9 @@ export const mutations = {
     const index = state.coastList.findIndex(coast => coast.id === id);
     state.coastList.splice(index, 1);
   },
+  setPaginationLength: (state, length) => {
+    state.paginationLength = length;
+  },
 };
 
 export const getters = {
@@ -40,12 +43,13 @@ export const actions = {
 
     return new Promise(resolve => {
         setTimeout(() => {
-          resolve(coasts[currentPage]);
+          resolve({currentPageData: coasts[currentPage], pages: Object.keys(coasts).length });
         }, 1000);
       })
       .then(res => {
-        commit('addLoadedData', { key: currentPage, data: res });
-        commit('saveCoastList', res);
+        commit('addLoadedData', { key: currentPage, data: res.currentPageData });
+        commit('saveCoastList', res.currentPageData);
+        commit('setPaginationLength', res.pages);
       });
   },
 };

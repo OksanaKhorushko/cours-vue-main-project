@@ -9,6 +9,7 @@ export default new Vuex.Store({
     coastList: [],
     loadedData: {},
     currentPage: 1,
+    paginationLength: 0,
   },
   mutations,
   actions,

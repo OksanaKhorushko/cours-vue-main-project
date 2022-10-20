@@ -1,6 +1,8 @@
 <template>
     <div>
-        <router-link :to="href" class="btn">ADD NEW +</router-link>
+        <v-btn color="teal my-5" :to="href"  dark>
+            ADD NEW COST <v-icon>mdi-plus</v-icon>
+        </v-btn>
         <router-view></router-view>
     </div>
 </template>
@@ -18,22 +20,3 @@ export default {
     }
 }
 </script>
-
-<style scoped lang="scss">
-    .btn {
-       background-color: cadetblue;
-       border: 1px solid cadetblue;
-       border-radius: 3px;
-       color: white;
-       padding: 7px 25px;
-       text-decoration: none;
-       display: inline-block;
-       cursor: pointer;
-       transition: .3s;
-
-       &:hover {
-          background-color: transparent;
-          color: cadetblue;
-       }
-    }
-</style>

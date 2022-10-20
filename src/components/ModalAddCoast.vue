@@ -18,7 +18,7 @@ export default {
       isVisible: true,
       date: (new Date()).toLocaleDateString(),
       amount: this.$route.query.value || 0,
-      description: this.$route.params.category || '',
+      description: this.$route.params.category || 'Other',
     };
   },
   components: {
@@ -27,7 +27,7 @@ export default {
   methods: {
     saveData(data) {
       this.$store.commit('saveCoast', {
-        id: Math.round(Math.random() * 10000),
+        id: Math.round(Math.random() * 100),
         date: data.date,
         category: data.description,
         value: data.amount
